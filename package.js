@@ -2,7 +2,7 @@ Package.describe({
   name: 'npaton:bitbucket',
   summary: 'Bitbucket API helper. Signs GET and POST requests for API 1 and 2.',
   version: '0.1.0',
-  git: ''
+  git: 'https://github.com/npaton/meteor-bitbucket.git'
 });
 
 Package.onUse(function(api) {
