@@ -37,7 +37,7 @@ Bitbucket.serviceConfiguration = function() {
 };
 
 Meteor.startup(function() {
-    Meteor.autorun(function() {
+    Deps.autorun(function() {
         Bitbucket._serviceConfiguration =
             ServiceConfiguration.configurations.find( {
                 'service': 'bitbucket' } );
@@ -53,8 +53,9 @@ Bitbucket.prototype = {
     constructor: Bitbucket,
 
     call: function(method, path, params) {
-        path = Bitbucket.basePath + path;
+        path = Bitbucket.basePath + path.replace(Bitbucket.basePath, "");
         params = _.extend({}, params || {});
+        method = method.toUpperCase();
         var response = this._oauthBinding().call(method, path, params);
         if (response.statusCode !== 200)
             throw new BitbucketError(response.statusCode, response.data);
